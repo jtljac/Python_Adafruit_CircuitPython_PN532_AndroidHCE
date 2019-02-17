@@ -469,5 +469,4 @@ class PN532:
         if response[0] != 0x00:
             return None
         # Return first 4 bytes since 16 bytes are always returned.
-        return response[1:]
-        pass
+        return response
