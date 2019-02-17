@@ -39,7 +39,7 @@ __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_PN532.git"
 
 
 import time
-from adafruit_pn532.adafruit_pn532 import PN532, BusyError
+from adafruit_pn532HCE.adafruit_pn532HCE import PN532, BusyError
 
 class PN532_UART(PN532):
     """Driver for the PN532 connected over Serial UART"""
