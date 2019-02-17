@@ -11,7 +11,7 @@ from digitalio import DigitalInOut
 #
 # NOTE: pick the import that matches the interface being used
 #
-from adafruit_pn532.i2c import PN532_I2C
+from adafruit_pn532HCE.i2c import PN532_I2C
 #from adafruit_pn532.spi import PN532_SPI
 #from adafruit_pn532.uart import PN532_UART
 
