@@ -444,3 +444,30 @@ class PN532:
         not read then None will be returned.
         """
         return self.mifare_classic_read_block(block_number)[0:4] # only 4 bytes per page
+
+
+    def selectAPDU(self, AID = [0xF0, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]):
+        """
+        Send a Select APDU command to the NFC device
+        """
+        # Send InDataExchange request to read block of MiFare data.
+
+        params = bytearray(6+len(AID))
+        params[0] = 0x00,               #CLA
+        params[1] = 0xA4,               #INS
+        params[2] = 0x04,               #P1
+        params[3] = 0x00,               #P2
+        params[4] = 0x07,               #Length of AID
+        for i in range(5,12):
+            params[i] = AID[i-5]        #AID defined on Android App
+        params[12] = 0x00               #Le
+
+        response = self.call_function(_COMMAND_INDATAEXCHANGE,
+                                    params=params,
+                                    response_length=32)
+        # Check first response is 0x00 to show success.
+        if response[0] != 0x00:
+            return None
+        # Return first 4 bytes since 16 bytes are always returned.
+        return response[1:]
+        pass

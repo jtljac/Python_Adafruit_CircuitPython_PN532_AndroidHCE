@@ -23,10 +23,10 @@ i2c = busio.I2C(board.SCL, board.SDA)
 
 # With I2C, we recommend connecting RSTPD_N (reset) to a digital pin for manual
 # harware reset
-reset_pin = DigitalInOut(board.D6)
+reset_pin = DigitalInOut(board.D17)
 # On Raspberry Pi, you must also connect a pin to P32 "H_Request" for hardware
 # wakeup! this means we don't need to do the I2C clock-stretch thing
-req_pin = DigitalInOut(board.D12)
+req_pin = DigitalInOut(board.D4)
 pn532 = PN532_I2C(i2c, debug=False, reset=reset_pin, req=req_pin)
 
 # SPI connection:
@@ -53,3 +53,7 @@ while True:
     if uid is None:
         continue
     print('Found card with UID:', [hex(i) for i in uid])
+
+    print("Attempting Sekect APDU")
+
+    pn532.selectAPDU([0xf0, 0x84, 0x82, 0x01, 0x55, 0x72, 0x75])
