@@ -453,15 +453,16 @@ class PN532:
         """
         # Send InDataExchange request to read block of MiFare data.
 
-        params = bytearray(6+len(AID))
-        params[0] = 0x00                #CLA
-        params[1] = 0xA4                #INS
-        params[2] = 0x04                #P1
-        params[3] = 0x00                #P2
-        params[4] = 0x07                #Length of AID
-        for i in range(5, 12):
+        params = bytearray(7+len(AID))
+        params[0] = 0x01
+        params[1] = 0x00                #CLA
+        params[2] = 0xA4                #INS
+        params[3] = 0x04                #P1
+        params[4] = 0x00                #P2
+        params[5] = 0x07                #Length of AID
+        for i in range(6, 13):
             params[i] = AID[i-5]        #AID defined on Android App
-        params[12] = 0x00               #Le
+        params[13] = 0x00               #Le
 
         response = self.call_function(_COMMAND_INDATAEXCHANGE,
                                     params=params,
