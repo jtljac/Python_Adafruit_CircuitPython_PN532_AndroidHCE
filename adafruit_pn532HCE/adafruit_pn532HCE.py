@@ -461,7 +461,7 @@ class PN532:
         params[4] = 0x00                #P2
         params[5] = 0x07                #Length of AID
         for i in range(6, 13):
-            params[i] = AID[i-5]        #AID defined on Android App
+            params[i] = AID[i-6]        #AID defined on Android App
         params[13] = 0x00               #Le
 
         response = self.call_function(_COMMAND_INDATAEXCHANGE,
