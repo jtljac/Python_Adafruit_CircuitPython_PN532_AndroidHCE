@@ -293,7 +293,7 @@ class PN532:
         # Build frame data with command and parameters.
         data = bytearray(2+len(params))
         data[0] = _HOSTTOPN532
-        data[1] = command & 0xFF
+        data[1] = command
         for i, val in enumerate(params):
             data[2+i] = val
         # Send frame and wait for response.
@@ -315,6 +315,7 @@ class PN532:
         if not (response[0] == _PN532TOHOST and response[1] == (command+1)):
             raise RuntimeError('Received unexpected command response!')
         # Return response data.
+        print(response)
         return response[2:]
 
     def get_firmware_version(self):
@@ -466,6 +467,7 @@ class PN532:
                                     params=params,
                                     response_length=32)
         # Check first response is 0x00 to show success.
+        print(response)
         if response[0] != 0x00:
             return None
         # Return first 4 bytes since 16 bytes are always returned.
