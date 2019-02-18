@@ -315,7 +315,7 @@ class PN532:
         if not (response[0] == _PN532TOHOST and response[1] == (command+1)):
             raise RuntimeError('Received unexpected command response!')
         # Return response data.
-        print(response)
+        print("Full respose: " + str(response))
         return response[2:]
 
     def get_firmware_version(self):
@@ -467,7 +467,7 @@ class PN532:
                                     params=params,
                                     response_length=32)
         # Check first response is 0x00 to show success.
-        print(response)
+        print("returned respose: " + str(response))
         if response[0] != 0x00:
             return None
         # Return first 4 bytes since 16 bytes are always returned.
