@@ -451,8 +451,7 @@ class PN532:
         """
         Send a Select APDU command to the NFC device
         """
-        # Send InDataExchange request to read block of MiFare data.
-
+        #Construct data packet
         params = bytearray(7+len(AID))
         params[0] = 0x01
         params[1] = 0x00                #CLA
